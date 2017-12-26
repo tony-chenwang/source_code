@@ -1,0 +1,1 @@
+currentdir := $(shell pwd)
