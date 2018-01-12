@@ -1,5 +1,5 @@
 /*******************************************************************************
-  * Copyright(C),2017,Mstar semi.co.,Ltd
+  * Copyright(C),2018,Mstar semi.co.,Ltd
   * @file Namev : 
   * @author  tony.chen@mstarsemi.com
   * @version V1.0.0
