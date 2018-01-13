@@ -19,7 +19,7 @@ fscanf
 strlen
 strstr
 strchr
-strtok
+strtok  string split
 strcpy
 strncpy
 strcmp
@@ -40,7 +40,36 @@ free
 realloc
 
 
+4.string conver
+atof  ascii to float
+atoi  ascii to int
+atol  ascii to long
+strtod  string to double
+strtol  string to long
 
+tolower  conver ch to lower
+to upper conver ch to upper 
+
+5.math:
+sin
+cos
+tan
+asin
+acos
+atan
+
+exp
+log
+log10
+
+pow
+sqrt
+
+abs
+fabs
+
+floor
+fmod
 
 
 
