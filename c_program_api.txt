@@ -26,7 +26,7 @@ strcmp
 strncmp
 strcat
 strncat
-
+strdup
 
 3.standard C memory
 memset
