@@ -5,7 +5,7 @@ OBJECT = $(OBJECT_CPP:.c=.o)
 
 CC := gcc
 #CFLAGS = -Wall -O0  $(INCLUDE_DIR) -g -D MI_ENABLE_DBG DBG_LEVEL = MI_DBG_ALL
-CFLAGS = -Wall -O0  $(INCLUDE_DIR) -g  -I ./include
+CFLAGS = -Wall -O0  $(INCLUDE_DIR) -g  -I ../../include
 
 
 .PHONY :ALL
