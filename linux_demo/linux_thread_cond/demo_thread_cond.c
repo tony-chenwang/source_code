@@ -6,21 +6,23 @@
   * @date  2018-01-15
   * @brief
 
-     pthread_mutex_init(pthread_mutex_t * mutex,const pthread_mutexattr_t *attr);
-     mutex 传入一个 pthread_mutex_t 结构
+     pthread_cond_init pthread_cond_init(pthread_cond_t *cv, \
+const pthread_condattr_t *cattr);
      attr 默认值为0
      一般不接返回值
 
-     pthread_mutex_lock(pthread_mutex_t *mutex);加锁 如果获取不到则阻塞等待
-     pthread_mutex_unlock(pthread_mutex_t *mutex);释放锁
- 
-     pthread_mutex_trylock 
-     调用后立即返回。因为它调用WaitForSingleObject函数时传递的第二个参数是0，表示不等待，立即返回。
-     调用lock或者tryLock后，都需要调用unlock来解锁
+      pthread_cond_wait(pthread_cond_t *cv, pthread_mutex_t *mutex)
+      函数将解锁mutex参数指向的互斥锁，并使当前线程阻塞在cv参数指向的条件变量上。
 
+      int pthread_cond_signal(pthread_cond_t *cv);
 
-      注意在 mutex ulock 之后 一定要 加一些延时的函数 否则可能会产生
-      两个thread 竞争的情况 导致某个进程 一直占用CPU
+      int pthread_cond_timedwait(pthread_cond_t *cv, pthread_mutex_t *mp, const structtimespec * abstime);
+
+      int pthread_cond_broadcast(pthread_cond_t *cv);
+      会解锁所有的线程
+
+      int pthread_cond_destroy(pthread_cond_t *cv);
+         
   * @History 2018-01-15
 *******************************************************************************/
 #include <sys/types.h>
@@ -47,27 +49,27 @@
 pthread_t thread_handle[2];
 
 //mutex for thread
-pthread_mutex_t mutex;
-
+static pthread_mutex_t mutex;
+static pthread_cond_t  cond = PTHREAD_COND_INITIALIZER; 
 
 
 void *thread1()
 {
-   
    while(1)
    {
-
+  
 #ifdef  MI_DBG_Mutex
      pthread_mutex_lock(&mutex);  
 #endif
-     MI_PRINT("%s is running A\n",__FUNCTION__);
-     sleep(10);
-	 MI_PRINT("%s is running B\n",__FUNCTION__);
+     pthread_cond_wait(&cond, &mutex);
 
+     MI_PRINT("%s is running A\n",__FUNCTION__);
+	 sleep(2);
+	 
 #ifdef  MI_DBG_Mutex
 	 pthread_mutex_unlock(&mutex);
 #endif
-	 //sleep(1);
+     sleep(1);
    }
    
    pthread_exit("thread1 exit");
@@ -77,6 +79,7 @@ void *thread1()
 void *thread2()
 {
    MI_U8 ret = 0;
+   MI_U8 loop = 0;
 	while(1)
 	{
 
@@ -86,55 +89,57 @@ void *thread2()
      //ret = pthread_mutex_trylock(&mutex);
      //perror("thread2 ----------\n");
 #endif
-     MI_PRINT("%s is running A\n",__FUNCTION__);
-     usleep(2000);
+     
 	 MI_PRINT("%s is running B\n",__FUNCTION__);
+     sleep(1);
+
+	 if( loop > 10 )
+	 {
+	    MI_PRINT("now we send thread signal \n");
+  		pthread_cond_signal(&cond);
+	 }
+
+	 loop++;
+	 
 #ifdef  MI_DBG_Mutex
 	  pthread_mutex_unlock(&mutex);
 #endif
-	 //sleep(1);
+      sleep(1);
+	 
 	}
 	pthread_exit("thread2 exit");
 	//pthread_exit("thread2 is over please check ");
  }
 
-MI_U8 demo_init_mutex(void)
+MI_U8 _demo_init(void)
 {
    // 默认的属性为 NULL
-   pthread_mutex_init(&mutex,NULL);  
-   return 1;
+	pthread_mutex_init(&mutex,NULL);  
+	pthread_cond_init(&cond, NULL);
+	return 1;
 
 }
 
 
 int main(int argc,char * argv[])
 {
-    MI_PRINT(" This is my posix thread demo! \n");
-
-    demo_init_mutex();
+    MI_PRINT(" This is my posix thread demo! \n");    
     MI_U8 eRet = -1;
+	void *Ptr= NULL;
+	_demo_init();
     memset(thread_handle,0x00,sizeof(pthread_t));
 
-    eRet = 0;
     eRet = pthread_create(&thread_handle[0], NULL, thread1, NULL);
-    if(eRet)
- 		goto FAIL;
-
-
     eRet = pthread_create(&thread_handle[1], NULL, thread2, NULL);
     if(eRet)
  		goto FAIL;
 
-
-
-     pthread_join(thread_handle[0],NULL);
-
 	 // we use pthread join to get some extra value
-     void *Ptr= NULL;
 	 pthread_join(thread_handle[1], &Ptr);
 	 MI_PRINT("The return message is %s \n", (char *)Ptr);
-
+     pthread_join(thread_handle[0],NULL);
 	 pthread_mutex_destroy(&mutex);  
+	 pthread_cond_destroy(&cond);
 
 	 return 1;
 	 
