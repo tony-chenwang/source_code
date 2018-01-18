@@ -98,11 +98,15 @@ pthread_mutext_trylock
 
 must use with mutex !!!!
 pthread_cond_init
-pthread_cond_destroy
-pthread_cond_wait
+pthread_cond_destroy 
+pthread_cond_wait it will release mutex when pending  get mutex when runing
 pthread_cond_timewait
 pthread_cond_signal
 pthread_cond_broadcast
+
+
+
+
 
 
 
