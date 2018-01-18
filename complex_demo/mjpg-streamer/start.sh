@@ -25,8 +25,11 @@
 ## This example shows how to invoke mjpg-streamer from the command line
 
 export LD_LIBRARY_PATH="$(pwd)"
-./mjpg_streamer -o "output_http.so -w ./www"
+#./mjpg_streamer -o "output_http.so -w ./www"
 
+#./mjpg_streamer -i "input_testpicture.so " -o "output_http.so -p 8080 -w ./www"
+
+./mjpg_streamer -i "input_testpicture.so -d 100" -o "output_http.so -p 8080 -w ./www"
 ## pwd echos the current path you are working at,
 ## the backticks open a subshell to execute the command pwd first
 ## the exported variable name configures ldopen() to search a certain
