@@ -104,6 +104,12 @@ pthread_cond_timewait
 pthread_cond_signal
 pthread_cond_broadcast
 
+select 
+poll
+epoll
+socket
+socketpair
+
 
 
 
