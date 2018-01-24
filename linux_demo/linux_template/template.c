@@ -25,7 +25,7 @@
 
 int main(int argc,char * argv[])
 {
-    MI_PRINT(" This is my first demo! \n");
+    MI_PRINT("This is my first demo! \n");
     MI_U32 ValueA = 100;
 	MI_U32 ValueB = 200;
     MI_U32 ValueC = 300;
