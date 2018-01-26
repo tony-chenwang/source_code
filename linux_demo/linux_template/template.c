@@ -25,7 +25,7 @@
 
 int main(int argc,char * argv[])
 {
-    MI_PRINT("This is my first demo! \n");
+    MI_PRINT("This is my first demo! %s builddate:%s %s\n",__FUNCTION__,__DATE__,__TIME__);
     MI_U32 ValueA = 100;
 	MI_U32 ValueB = 200;
     MI_U32 ValueC = 300;
@@ -34,17 +34,17 @@ int main(int argc,char * argv[])
    
      while(1)
      {
-        system("clear");	
-	MI_U32 ALIGNVALUE = 13+16;
-	MI_PRINT("The ALIGN value  is %d \n",ALIGN_DOWNTO_16(ALIGNVALUE));
-	MI_PRINT("The ALIGN value  is %d \n",MEM_ALIGN(ALIGNVALUE,16));
+        //system("clear");	
+		MI_U32 ALIGNVALUE = 13+16;
+		MI_PRINT("The ALIGN value  is %d \n",ALIGN_DOWNTO_16(ALIGNVALUE));
+		MI_PRINT("The ALIGN value  is %d \n",MEM_ALIGN(ALIGNVALUE,16));
 
-	GETMAX(ValueMAX,ValueA,ValueB,ValueC)
-        MI_PRINT("The MAX value of A&B&C is %d \n",ValueMAX);
+		GETMAX(ValueMAX,ValueA,ValueB,ValueC)
+	        MI_PRINT("The MAX value of A&B&C is %d \n",ValueMAX);
 
-	GETMIN(ValueMIN,ValueA,ValueB,ValueC)
-	MI_PRINT("The MIN value of A&B&C is %d \n",ValueMIN);
-        sleep(2);    
+		GETMIN(ValueMIN,ValueA,ValueB,ValueC)
+		MI_PRINT("The MIN value of A&B&C is %d \n",ValueMIN);
+	        sleep(2);    
     } 
      return 0;
 }
