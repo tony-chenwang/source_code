@@ -28,6 +28,7 @@
 #include "mi_internal.h"
 
 #define BUFFERSIZE 50
+#define debug_module  2
 
 #define CHECK_RET(X)  \
     {   \
@@ -44,7 +45,7 @@ MI_S32 socketfd[2] = {0};
 MI_S8* WriteString = "This is tony call 2018 0203";
 
 MI_S8 Readbuffer[BUFFERSIZE] = {0};
-
+pid_t pid = 0;
 
 
 MI_BOOL _demo_createsopa(void)
@@ -60,19 +61,56 @@ int main(int argc,char * argv[])
     MI_PRINT("This is my socket pair  demo! \n");
     
     _demo_createsopa();
+
+#if (debug_module == 1)
     CHECK_RET(write(socketfd[0] , WriteString , strlen(WriteString)));
-
-
     sleep(5);
-	
 	CHECK_RET(read(socketfd[1], Readbuffer , BUFFERSIZE ));
     MI_PRINT("Read string in same process : %s \n",Readbuffer); 
     MI_PRINT("reach the end of main \n");
+	
+#elif (debug_module == 2)
 
+    if((pid = fork()) > 0)
+	{ 
+        MI_PRINT("Parent process's pid is %d\n",getpid()); 
+        close(socketfd[1]); 
+        CHECK_RET(write(socketfd[0] ,WriteString ,strlen(WriteString) ));
+        MI_PRINT("Send string success!! \n");
+	}
+	else if(pid == 0)
+	{ 
+        MI_PRINT("Fork child process successed\n"); 
+        MI_PRINT("Child process's pid is :%d\n",getpid()); 
+        close(socketfd[0]);
+		sleep (10);
+		MI_S8 eRet = read(socketfd[1] ,Readbuffer ,BUFFERSIZE);
+		if( eRet == -1)
+			MI_PRINT("Read string  error in process %d :\n",getpid()); 
+		else
+			MI_PRINT("Read string %s in process %d\n",Readbuffer,getpid());
+	}
+	else
+	{ 
+	        printf("Fork failed:%s\n",strerror(errno)); 
+	        exit(-1); 
+	} 
 
-    /*CHECK_RET(read(socketfd[0], Readbuffer, BUFFERSIZE));
-    printf("Read from s0 :%s\n",buf); 
-    return 0;*/
+#endif
+
+#if 0
+    MI_S8 eRet = read(socketfd[1] ,Readbuffer ,BUFFERSIZE);
+
+    if( eRet == -1)
+		MI_PRINT("Read string  error in process %d :\n",getpid()); 
+    else
+		MI_PRINT("Read string %s in process \n",Readbuffer,getpid());
+#endif
+
+    MI_PRINT("reach the end of main %d \n",getpid());
+    pause();
+    return TRUE;
+
 }
 
 
