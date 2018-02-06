@@ -23,6 +23,18 @@
 #include "mi_common.h"
 #include "mi_internal.h"
 
+
+#define CHECK_RET(X)  \
+    {   \
+        if( X < 0 )  \
+        {   \
+            DBG_ERR("INVALID RETURN VALUE \n");  \
+            fprintf(stderr," error msg is :%s\n",strerror(errno));\
+            exit(-1);\
+        }   \
+    }   \
+
+
 int main(int argc,char * argv[])
 {
     MI_PRINT("This is my first demo! %s builddate:%s %s\n",__FUNCTION__,__DATE__,__TIME__);
