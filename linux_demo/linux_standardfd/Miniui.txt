@@ -1,0 +1,114 @@
+assssssssssssssssssssss
+haha !!
+estion
+mini UI 的接口：
+int gr_init(void);            /* 初始化图形显示,主要是打开设备、分配内存、初始化一些参数 */ 
+void gr_exit(void);           /* 注销图形显示,关闭设备并释放内存 */   
+int gr_fb_width(void);        /* 获取屏幕的宽度 */ 
+int gr_fb_height(void);       /* 获取屏幕的高度 */ 
+gr_pixel *gr_fb_data(void);   /* 获取显示数据缓存的地址 */ 
+void gr_flip(void);           /* 刷新显示内容 */ 
+void gr_fb_blank(bool blank); /* 清屏 */ 
+void gr_color(unsignedcharr, unsignedcharg, unsignedcharb, unsignedchara); /* 设置颜色 */ 
+void gr_fill(intx,inty,intw,inth); /* 填充矩形区域,参数分别代表起始坐标、矩形区域大小 */ 
+int gr_text(intx,inty,constchar*s); /* 显示字符串 */ 
+int gr_measure(constchar*s);            /* 获取字符串在默认字库中占用的像素长度 */ 
+void gr_font_size(int*x,int*y);        /* 获取当前字库一个字符所占的长宽 */  
+
+unsigned int gr_get_width(gr_surface surface);  /* 获取图片宽度 */ 
+Unsigned int gr_get_height(gr_surface surface); /* 获取图片高度 */ 
+/* 根据图片创建显示资源数据,name为图片在mk文件指定的相对路径 */ 
+int res_create_surface(constchar* name, gr_surface* pSurface); 
+void res_free_surface(gr_surface surface);      /* 释放资源数据 */ 
+
+row 行 column 列 
+
+void gr_blit(gr_surface source,intsx,intsy,intw,inth,intdx,intdy); /* 填充由source指定的图片 */ 参数分别代表起始坐标、矩形区域大小 */ 
+
+Icon currentIcon; // set current icon  
+INSTALLING_UPDATE, 
+ERASING, 
+NO_COMMAND, 
+ERROR, 
+RECOVERY
+
+
+bool show_text; //当前是否在显示文本
+
+progressScopeDuration // = duration 
+
+backgroundIcon
+
+backgroundIcon[NO_COMMAND] = backgroundIcon[ERROR];
+
+backgroundIcon[ERASING] = backgroundIcon[INSTALLING_UPDATE];
+
+backgroundIcon[NONE] = NULL;
+
+
+show_progress（0.1,10） 含义：下面的操作可能进行10秒钟完成，完成后进度前进0.1（10%）
+
+
+draw_screen_locked  //重画屏幕
+
+draw_background_locked  画当前的背景
+
+
+SetBackground  -->  update_screen_locked  --> draw_screen_locked
+
+currentIcon
+
+
+-->          
+draw_background_locked(currentIcon);
+draw_progress_locked();
+draw_top_title_locked();
+draw_tip_title_locked(currentTip);
+draw_exit_recovery_tip_title_locked(currentExitRecoveryTip);
+
+---------->
+draw_background_locked(currentIcon);
+   icon == ERROR
+   icon == INSTALLING_UPDATE)
+   icon == RECOVERY
+      gr_blit titleASurface
+      
+---------->
+draw_top_title_locked();     
+    gr_blit  --->  titleASurface
+    gr_blit  --->  titleBSurface   
+  
+---------->                 <--SetTipTitle  
+draw_tip_title_locked
+tipSurface
+gr_blit  tipSurface
+
+
+draw_exit_recovery_tip_title_locked
+
+float p = (progressScopeStart + progress * progressScopeSize)*2;
+this is tonychen add  hahaha !!
+this is tonychen add  hahaha !!
+this is tonychen add  hahaha !!
+this is tonychen add  hahaha !!
+this is tonychen add  hahaha !!
+this is tonychen add  hahaha !!
+this is tonychen add  hahaha !!
+this is tonychen add  hahaha !!
+this is tonychen add  hahaha !!
+this is tonychen add  hahaha !!
+this is tonychen add  hahaha !!
+this is tonychen add  hahaha !!
+this is tonychen add  hahaha !!
+this is tonychen add  hahaha !!
+this is tonychen add  hahaha !!
+this is tonychen add  hahaha !!
+this is tonychen add  hahaha !!
+this is tonychen add  hahaha !!
+this is tonychen add  hahaha !!
+this is tonychen add  hahaha !!
+chenwang
+this is tonychen add  hahaha !!
+chenwang
+this is tonychen add  hahaha !!
+sadasdasd
