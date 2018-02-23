@@ -33,7 +33,7 @@
 
   		fseek            int fseek(FILE*stream,long int offset,int origin)
 
-  		
+  		fprintf          int fprintf(FILE*stream,const char *format[,argument]);
 	
   * @History
 *******************************************************************************/
@@ -148,6 +148,11 @@ int main(int argc,char * argv[])
 	rewind(fp);
 	fseek(fp,100,SEEK_CUR);
     MI_PRINT("The Current file location is %d \n",ftell(fp));
+
+    fseek(fp,0,SEEK_END);
+    fprintf(fp,"This is MY demo %s %s \n",__DATE__,__TIME__);
+	
+
 	
 	fclose(fp);
 
