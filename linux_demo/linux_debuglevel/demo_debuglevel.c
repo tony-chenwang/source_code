@@ -34,7 +34,7 @@ typedef enum
 
 
 
-#define PrivateDebuglevel u32PrivateDebuglevel
+#define PrivateDebuglevel PRIVATE_DBG_ALL
 
 MI_U32  u32PrivateDebuglevel = PRIVATE_DBG_ALL;
 

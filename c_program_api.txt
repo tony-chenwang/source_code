@@ -1,43 +1,48 @@
 1.standard C file
-fopen
-fclose
-fread
-fwrite
-fseek
-ftell
-ferror
-feof
-rewind
+fopen OK
+fclose OK
+fread OK
+fwrite OK
+fseek OK
+ftell OK
+ferror  --------- NOK
+feof OK
+rewind OK 
 clearerr
-remove
-rename
-fflush
-fprintf
-fscanf
+remove OK
+rename OK
+fflush OK 
+fprintf OK 
+fscanf OK 
+fgets OK
+fputs OK
+fprintf OK 
+fscanf  --------- donnot care 
+
 
 2.standard C string
-strlen
-strstr
-strchr
-strtok  string split
-strcpy
-strncpy
-strcmp
-strncmp
-strcat
-strncat
-strdup
+strlen    OK
+strstr   OK
+strchr   OK
+strtok  string split  ---- NOK
+strcpy  OK
+strncpy OK
+strcmp OK
+strncmp OK
+strcat OK
+strncat OK
+strdup  OK
 
 3.standard C memory
-memset
-memcpy
-memmove
-memcmp
+memset  OK
+memcpy OK
+memmove OK
+memcmp OK
 
-malloc
-calloc
-free
-realloc
+malloc  OK
+calloc OK
+free  OK
+realloc   ---- NOK
 
 
 4.string conver
@@ -72,21 +77,8 @@ floor
 fmod
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+6. format string function 
+vprintf  OK
+vfprintf OK
 
 
