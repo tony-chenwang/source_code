@@ -52,7 +52,12 @@ void _demo_va_func(char* format,...)
 	 va_start(arg_ptr, format); 
 #if (debug == 1)
      printf("content %s \n",format);
+     printf("arg_ptr is: %s \n",va_arg(arg_ptr,char*));
+     printf("arg_ptr is: %s \n",va_arg(arg_ptr,char*));
 #endif
+     va_end(arg_ptr);
+
+     va_start(arg_ptr, format); 
      vprintf(format,arg_ptr);
 	 va_end(arg_ptr);
 }
@@ -83,7 +88,7 @@ int main(int argc,char * argv[])
     MI_PRINT("This is my Va args demo! %s builddate:%s %s\n",__FUNCTION__,__DATE__,__TIME__);
 
    
-    _demo_va_func("This is sat I am working %s %s \n",__DATE__,__TIME__);
+    _demo_va_func("This is say I am working %s %s \n",__DATE__,__TIME__);
    
      fp  = fopen("demo.log","w+");
      _demo_va_file(fp ,"build time %s %s \n",__DATE__,__TIME__);
