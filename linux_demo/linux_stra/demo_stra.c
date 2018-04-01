@@ -77,7 +77,14 @@ int main(int argc,char * argv[])
     sscanf(InputBuffer,"%*[^/] %s %*[^/]",StringBufferP);
     MI_PRINT("The stringbufferP is %s \n",StringBufferP);
 
+    // 截取 空格之前的字符串
+    sscanf("123456 abcdedf", "%[^ ]", StringBufferP);
+    MI_PRINT("%s\n", StringBufferP);
 
+   // 表示只是匹配 1-9a-z 的字符串
+    sscanf("123456abcdedfBCDEF", "%[1-9a-z]", StringBufferP);
+    MI_PRINT("%s\n", StringBufferP);
+    
     MI_PRINT("--------------------- \n");
     memset(InputBuffer,0x00,sizeof(InputBuffer));
 	ValueA = 100;
