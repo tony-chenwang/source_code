@@ -36,7 +36,7 @@ int main(int argc,char * argv[])
     int fd = -1;
     int ret_size = -1;
  
-    fd = open(dev_node,O_RDONLY,0x700);
+    fd = open(dev_node,O_RDWR,0x700);
     if (fd < 0 ) 
         goto Fail;
     

@@ -1,6 +1,17 @@
+platfrom = ubuntu 
+
+ifeq "$(platform)" "k7u"
 CC      = arm-linux-gnueabihf-gcc
 CXX     = arm-linux-gnueabihf-g++
 LINK    = arm-linux-gnueabihf-gcc
+else
+CC  = gcc
+CXX = g++
+LINK = gcc
+endif
+
+
+
 CFLAGS  = -g -Wall -O2
 TARGET  = demo_hello
 SRCS    = $(wildcard *.cpp)
