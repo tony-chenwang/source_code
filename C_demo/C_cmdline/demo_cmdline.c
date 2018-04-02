@@ -35,26 +35,32 @@
     }   \
 
 
-MI_U8 read_buffer[100] = {0};
+char read_buffer[100] = {0};
 
+// max arg number 6
 #define MAX_ARGC	6
-
-
-
-
 
 
 static void cmd_exit(int argc, char **argv)
 {
 	MI_PRINT("\n\rthis is in %s ",__FUNCTION__);
+    return;
 }
-
 
 
 static void cmd_help(int argc, char **argv)
 {
 	MI_PRINT("\n\rthis is in %s ",__FUNCTION__);
 }
+
+
+static void cmd_demo(int argc, char **argv)
+{
+	MI_PRINT("\n\rthis is in %s ",__FUNCTION__);
+    MI_PRINT("Hello world!!! \r\n");
+}
+
+
 
 typedef struct _cmd_entry {
 	char *command;
@@ -63,19 +69,20 @@ typedef struct _cmd_entry {
 
 static const cmd_entry cmd_table[] = {
 	{"exit", cmd_exit},
-	{"help", cmd_help}
+	{"help", cmd_help},
+	{"demo", cmd_demo}
 };
 
 static int parse_cmd(char *buf, char **argv)
 {
 	int argc = 0;
-
 	memset(argv, 0, sizeof(argv)*MAX_ARGC);
-	while((argc < MAX_ARGC) && (*buf != '\0')) 
+    
+	while((argc < MAX_ARGC) && (*buf != '\0')&&(*buf != '\n')) 
     {
 		argv[argc] = buf;
 		argc ++;
-		buf ++;
+		//buf ++;
 
 		while((*buf != ' ') && (*buf != '\0'))
 			buf ++;
@@ -85,10 +92,7 @@ static int parse_cmd(char *buf, char **argv)
 			*buf = '\0';
 			 buf ++;
 		}
-
-        
-
-     }
+    }
 
 	  return argc;
 }
@@ -97,27 +101,23 @@ static int parse_cmd(char *buf, char **argv)
 
 int main(int argc,char * argv[])
 {
-    MI_PRINT("This is my first demo! %s builddate:%s %s\n",__FUNCTION__,__DATE__,__TIME__);
+    MI_PRINT("This is cmdline first demo! %s builddate:%s %s\n",__FUNCTION__,__DATE__,__TIME__);
 
-    int margc;
+    int margc = 0;
     int i = 0;
     char *margv[MAX_ARGC];
    
     while(1)
     {
-      printf("\r\n\n# ");
+    
+      printf("\n# ");
+      memset(read_buffer,0x00,sizeof(read_buffer));
+      
       fgets(read_buffer,100,stdin);
 
-      memset(margv,0x00,sizeof(char*));
+      memset(margv,0x00,sizeof(char*)*MAX_ARGC);
       if((margc = parse_cmd(read_buffer, margv)) > 0)
       {
-      #if 0
-        MI_PRINT("the margc is %d \n",margc);
-        MI_PRINT("the margv[0] is %d \n",margv[0]);
-        MI_PRINT("the margv[1] is %s \n",margv[1]);
-        MI_PRINT("the margv[2] is %s \n",margv[2]);
-     #endif
-     
 		int found = 0;
 
 		for(i = 0; i < sizeof(cmd_table) / sizeof(cmd_table[0]); i++) 
@@ -131,12 +131,9 @@ int main(int argc,char * argv[])
 		}
 
         if(!found)
-            printf("unknown command '%d' \n", margv[0]);
+            printf("unknown command '%s' \n", margv[0]);
         
       }
-
-	   memset(read_buffer,0x00,sizeof(read_buffer));
-
     } 
     
     return 0;
