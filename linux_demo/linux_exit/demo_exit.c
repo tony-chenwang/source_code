@@ -5,14 +5,14 @@
   * @version V1.0.0
   * @date     
   * @brief
-     #if + 表达式 表达式内容为真 则会执行
-     #if #else #endif              #if #elif #elif #endif 
+     #if + expression  if expression is true then compile
+     #if #else #endif   #if #elif #elif #endif 
   
 
-     exit()  退出进程 会做一些善后处理的工作  退出状态码 可以 echo %?
-     _exit() 立刻退出进程
+     exit()  exit task will do some opoeration use echo $? to get exit code 
+     _exit() exit immediately
 
-     abort()  非正常退出 产生coredump 退出状态码 134
+     abort() will cause coredump signal 6
 
   * @History
 *******************************************************************************/
@@ -39,20 +39,20 @@ int main(int argc,char * argv[])
     MI_PRINT(" This is my first demo! \n");
 
     #if ( USE_MODE == 1 )
-	exit(1);
-	#endif
+      exit(1);
+    #endif
 
     #if ( USE_MODE == 2 )
-	exit(2);
-	#endif
+      exit(2);
+    #endif
 
     #if ( USE_MODE == 3 )
-	exit(3);
-	#endif
+     exit(3);
+    #endif
 
     #if ( USE_MODE == 4 )
-	abort();
-	#endif
+     abort();
+    #endif
 
     return 0;
 }
