@@ -1,22 +1,27 @@
 1. File System API
-*open
-*close
-*read
-*write
-*lseek
-*create
-*dup
+open  fopen
+close fclose
+read  fread
+write fwrite
+lseek fseek
+create
+dup
 dup2
 fcntl
 fsync
-*umask
+umask
+
+ftell
+fflush
+rewind
+feof
 
 flock
 pread
 pwrite
 
 
-*access
+access
 chdir
 fchdir
 chmod
@@ -27,7 +32,7 @@ chroot
 stat
 lstat
 fstat
-*readdir
+readdir
 rmdir
 link
 ulink
@@ -38,27 +43,29 @@ umount
 
 
 2.IO operations
-*poll
-*select
-*epoll
+poll
+select
+epoll
 
 
-3.process 
-*fork
-*vfork
-*execv
-*execls
-*exit
-*_exit
-*abort
-*wait
-*waitpid
-*sleep
-*usleep
+3.process operation
+fork
+vfork
+execv
+execls
+exit
+_exit
+abort
+wait
+waitpid
+sleep
+usleep
+env
 
 
 4.IPC
-*pipe
+pipe
+mkfifo
 
 msgctl
 msgget
@@ -75,13 +82,13 @@ shmget
 shmat
 shmdt
 
-*signal
-*kill
-*sigaction
-*sigprocmask
+signal
+kill
+sigaction
+sigprocmask
 
 
-thread:
+Thread:
 pthread_create
 pthread_exit
 pthread_join
@@ -95,7 +102,6 @@ pthread_mutex_lock
 pthread_mutex_unlock
 pthread_mutext_trylock
 
-
 must use with mutex !!!!
 pthread_cond_init
 pthread_cond_destroy 
@@ -104,11 +110,8 @@ pthread_cond_timewait
 pthread_cond_signal
 pthread_cond_broadcast
 
-select 
-poll
-epoll
-socket
-socketpair
+socket:
+
 
 
 
