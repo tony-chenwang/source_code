@@ -13,8 +13,10 @@
      _exit() exit immediately
 
      abort() will cause coredump signal 6
-
+     
   * @History
+      19/02/24 review pass
+      
 *******************************************************************************/
 #include <sys/types.h>
 #include <unistd.h>
@@ -32,7 +34,7 @@
 #include "mi_common.h"
 #include "mi_internal.h"
 
-#define USE_MODE  4
+#define USE_MODE  2
 
 int main(int argc,char * argv[])
 {
